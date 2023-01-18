@@ -93,6 +93,26 @@ const EditCalendar = (props: Props) => {
 							<p>Event: {referenceEvent.event}</p>
 							<div className="mt-5 flex gap-2 flex-col">
 								<TextInput
+									label="Custom Summary"
+									placeholder="Enter a custom title (optional)"
+									value={referenceEvent.custom_summary}
+									onChange={(e) => {
+										if (
+											referenceEvent.custom_summary ===
+											e.target.value
+										) {
+											delete changes.custom_summary;
+											setChanges(changes);
+											return;
+										}
+
+										setChanges({
+											...changes,
+											custom_summary: e.target.value,
+										});
+									}}
+								/>
+								<TextInput
 									label="Location Building"
 									placeholder="Enter the Location Building"
 									value={referenceEvent.location_building}
@@ -181,12 +201,16 @@ const EditCalendar = (props: Props) => {
 						<a
 							className="text-blue-500"
 							href={
-								"https://aplb.xyz/nucal/v1.1/calendar?cal_slug" +
-								calendar.slug
+								"https://aplb.xyz/nucal/v1.1/calendar?cal_slug=" +
+								calendar.slug +
+								"&ts=" +
+								new Date().getTime()
 							}
 						>
-							{"https://aplb.xyz/nucal/v1.1/calendar?cal_slug" +
-								calendar.slug}
+							{"https://aplb.xyz/nucal/v1.1/calendar?cal_slug=" +
+								calendar.slug +
+								"&ts=" +
+								new Date().getTime()}
 						</a>
 					</h2>
 					<div className="border-2 p-3 rounded-md mt-10">
