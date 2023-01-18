@@ -8,11 +8,15 @@ const HomePage = () => {
 	const [feed, setFeed] = useState("");
 	const [slug, setSlug] = useState("");
 
+	const [loading, setLoading] = useState(false);
+
 	const initialize = async () => {
 		if (!email || !feed) {
 			window.alert("Please enter your email and feed URL");
 			return;
 		}
+
+		setLoading(true);
 
 		const response = await NewRequest({
 			route: "/nucal/v1.1/initializer",
@@ -24,8 +28,10 @@ const HomePage = () => {
 			auth: false,
 		});
 		console.log(response);
+		setLoading(false);
 		if (response.success) {
 			// TODO: Redirect to the calendar page
+			window.location.href = "/editCalendar?slug=" + response.data.slug;
 		} else {
 			if (response.data.data.error) {
 				window.alert(response.data.data.error);
@@ -43,6 +49,8 @@ const HomePage = () => {
 			return;
 		}
 
+		setLoading(true);
+
 		const response = await NewRequest({
 			route: "/nucal/v1.1/getCalendar",
 			method: "GET",
@@ -51,9 +59,10 @@ const HomePage = () => {
 			},
 		});
 		console.log(response);
+		setLoading(false);
 		if (response.success) {
 			// TODO: Redirect to the calendar page
-            window.location.href = "/editCalendar?slug=" + slug;
+			window.location.href = "/editCalendar?slug=" + slug;
 		} else {
 			if (response.data.data.error) {
 				window.alert(response.data.data.error);
@@ -66,38 +75,45 @@ const HomePage = () => {
 	};
 
 	return (
-		<div className="p-10">
-			<h1 className="text-2xl pb-7">NU Calendar Generator</h1>
-			<div className="flex flex-col w-[500px] gap-4">
-				<TextInput
-					placeholder="Enter your Northeastern Email"
-					label="Northeastern Email"
-					value={email}
-					setValue={setEmail}
-				/>
-				<TextInput
-					placeholder="Enter your EAB Feed URL"
-					label="EAB Feed"
-					value={feed}
-					setValue={setFeed}
-					onEnterHit={initialize}
-				/>
-				<Button value="Submit" onClick={() => initialize()} />
+		<>
+			{loading ? (
+				<div className="fixed w-full h-full bg-[#00000010] flex items-center justify-center">
+					<h1 className="text-4xl font-bold">Loading...</h1>
+				</div>
+			) : null}
+			<div className="p-10">
+				<h1 className="text-2xl pb-7">NU Calendar Generator</h1>
+				<div className="flex flex-col w-[500px] gap-4">
+					<TextInput
+						placeholder="Enter your Northeastern Email"
+						label="Northeastern Email"
+						value={email}
+						setValue={setEmail}
+					/>
+					<TextInput
+						placeholder="Enter your EAB Feed URL"
+						label="EAB Feed"
+						value={feed}
+						setValue={setFeed}
+						onEnterHit={initialize}
+					/>
+					<Button value="Submit" onClick={() => initialize()} />
+				</div>
+				<p className="my-5 relative text-lg font-medium text-center w-[500px]">
+					Or
+				</p>
+				<div className="flex flex-col w-[500px] gap-4">
+					<TextInput
+						placeholder="Enter your APLB Slug"
+						label="APLB Slug"
+						value={slug}
+						setValue={setSlug}
+						onEnterHit={lookupSlug}
+					/>
+					<Button value="Submit" onClick={() => lookupSlug()} />
+				</div>
 			</div>
-			<p className="my-5 relative text-lg font-medium text-center w-[500px]">
-				Or
-			</p>
-			<div className="flex flex-col w-[500px] gap-4">
-				<TextInput
-					placeholder="Enter your APLB Slug"
-					label="APLB Slug"
-					value={slug}
-					setValue={setSlug}
-					onEnterHit={lookupSlug}
-				/>
-				<Button value="Submit" onClick={() => lookupSlug()} />
-			</div>
-		</div>
+		</>
 	);
 };
 
