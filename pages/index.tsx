@@ -53,6 +53,7 @@ const HomePage = () => {
 		console.log(response);
 		if (response.success) {
 			// TODO: Redirect to the calendar page
+            window.location.href = "/editCalendar?slug=" + slug;
 		} else {
 			if (response.data.data.error) {
 				window.alert(response.data.data.error);

@@ -1,16 +1,20 @@
 type ButtonProps = {
 	value: string;
+	className?: string;
 
 	onClick?: () => void;
 };
 
 const Button = (props: ButtonProps) => {
-	const { value, onClick = () => {} } = props;
+	const { value, className = "", onClick = () => {} } = props;
 
 	return (
 		<button
 			onClick={onClick}
-			className="w-full bg-blue-500 text-white h-[50px] rounded-md border-none outline-none"
+			className={
+				"w-full bg-blue-500 text-white h-[50px] rounded-md border-none outline-none " +
+				className
+			}
 		>
 			{props.value}
 		</button>

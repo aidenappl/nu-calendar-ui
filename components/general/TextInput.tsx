@@ -7,6 +7,7 @@ type TextInputProps = {
 
 	setValue?: (value: string) => void;
 	onEnterHit?: () => void;
+	onChange?: (e: any) => void;
 };
 
 const TextInput = (props: TextInputProps) => {
@@ -15,6 +16,7 @@ const TextInput = (props: TextInputProps) => {
 		placeholder,
 		setValue = (value: string) => {},
 		onEnterHit = () => {},
+		onChange = (e: any) => {},
 	} = props;
 
 	const [value, setLocValue] = useState(props.value);
@@ -35,12 +37,13 @@ const TextInput = (props: TextInputProps) => {
 					onChange={(e) => {
 						setLocValue(e.target.value);
 						setValue(e.target.value);
+						onChange(e);
 					}}
-                    onKeyDown={(e) => {
-                        if (e.key === "Enter") {
-                            onEnterHit();
-                        }
-                    }}
+					onKeyDown={(e) => {
+						if (e.key === "Enter") {
+							onEnterHit();
+						}
+					}}
 					type={"text"}
 					placeholder={placeholder}
 				/>
