@@ -81,9 +81,11 @@ const HomePage = () => {
 					<h1 className="text-4xl font-bold">Loading...</h1>
 				</div>
 			) : null}
-			<div className="p-10">
-				<h1 className="text-2xl pb-7">NU Calendar Generator</h1>
-				<div className="flex flex-col w-[500px] gap-4">
+			<div className="p-5 md:p-10 ">
+				<h1 className="w-full text-center md:text-left text-2xl pb-7">
+					NU Calendar Generator
+				</h1>
+				<div className="flex flex-col w-full md:w-[500px] gap-4">
 					<TextInput
 						placeholder="Enter your Northeastern Email"
 						label="Northeastern Email"
@@ -99,10 +101,10 @@ const HomePage = () => {
 					/>
 					<Button value="Submit" onClick={() => initialize()} />
 				</div>
-				<p className="my-5 relative text-lg font-medium text-center w-[500px]">
+				<p className="my-5 relative text-lg font-medium text-center w-full md:w-[500px]">
 					Or
 				</p>
-				<div className="flex flex-col w-[500px] gap-4">
+				<div className="flex flex-col w-full md:w-[500px] gap-4">
 					<TextInput
 						placeholder="Enter your APLB Slug"
 						label="APLB Slug"
