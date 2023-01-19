@@ -71,6 +71,7 @@ const HomePage = () => {
 			// TODO: Redirect to the calendar page
 			window.location.href = "/editCalendar?slug=" + slug;
 		} else {
+			setSlug("");
 			if (response.data.data.error) {
 				window.alert(response.data.data.error);
 				return;

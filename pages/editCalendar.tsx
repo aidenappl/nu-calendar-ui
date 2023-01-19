@@ -23,6 +23,7 @@ const GetCalendar = async (slug: string) => {
 	} else {
 		if (response.data.data.error) {
 			window.alert(response.data.data.error);
+			window.location.href = "/";
 			return;
 		}
 		window.alert(
