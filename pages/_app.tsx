@@ -1,6 +1,13 @@
-import '@/styles/globals.css'
-import type { AppProps } from 'next/app'
+import PageHead from "@/components/general/PageHead";
+import "@/styles/globals.css";
 
-export default function App({ Component, pageProps }: any) {
-  return <Component {...pageProps} />
-}
+const App = ({ Component, pageProps }: any) => {
+	return (
+		<>
+			<PageHead />
+			<Component {...pageProps} />
+		</>
+	);
+};
+
+export default App;
