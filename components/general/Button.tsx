@@ -12,8 +12,8 @@ const Button = (props: ButtonProps) => {
 		<button
 			onClick={onClick}
 			className={
-				"w-full bg-blue-500 text-white h-[50px] rounded-md border-none outline-none " +
-				className
+				className +
+				" w-full bg-blue-500 text-white h-[50px] rounded-md border-none outline-none"
 			}
 		>
 			{props.value}

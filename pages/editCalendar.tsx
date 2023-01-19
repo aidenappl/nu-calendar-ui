@@ -50,6 +50,14 @@ const EditCalendar = (props: Props) => {
 		const calendar = await GetCalendar(props.slug);
 		console.log(calendar);
 		setCalendar(calendar);
+
+		onkeydown = (event: any) => keyDown(event);
+	};
+
+	const keyDown = (e: any) => {
+		if (e.key === "Escape") {
+			discardRefEvent();
+		}
 	};
 
 	const discardRefEvent = () => {
@@ -113,6 +121,37 @@ const EditCalendar = (props: Props) => {
 										});
 									}}
 								/>
+								<div>
+									<input
+										type="checkbox"
+										id="checkIncludeLoc"
+										defaultChecked={
+											referenceEvent.include_location
+										}
+										onChange={(e: any) => {
+											let val = e.target.checked;
+											if (
+												referenceEvent.include_location ===
+												val
+											) {
+												delete changes.include_location;
+												setChanges(changes);
+												return;
+											}
+
+											setChanges({
+												...changes,
+												include_location: val,
+											});
+										}}
+									/>
+									<label
+										className="pl-2 cursor-pointer"
+										htmlFor="checkIncludeLoc"
+									>
+										Include Class Details in Title
+									</label>
+								</div>
 								<TextInput
 									label="Location Building"
 									placeholder="Enter the Location Building"
@@ -214,6 +253,22 @@ const EditCalendar = (props: Props) => {
 								new Date().getTime()}
 						</a>
 					</h2>
+					{/* <div className="mt-4">
+						<a
+							className="text-white bg-blue-500 px-5 py-2 rounded-md cursor-pointer"
+							onClick={() => {
+								window.open(
+									"https://www.google.com/calendar/render?cid=https://aplb.xyz/nucal/v1.1/calendar?cal_slug=" +
+										calendar.slug +
+										"&ts=" +
+										new Date().getTime(),
+									"_blank"
+								);
+							}}
+						>
+							Add to Calendar
+						</a>
+					</div> */}
 					<div className="border-2 p-3 rounded-md mt-10">
 						{calendar.event_references.map(
 							(event: any, index: number) => {
@@ -229,6 +284,7 @@ const EditCalendar = (props: Props) => {
 									<div
 										key={index}
 										className="flex justify-between hover:bg-slate-50 py-1 px-2 cursor-pointer"
+										onClick={() => setReferenceEvent(event)}
 									>
 										<div className="flex  gap-4">
 											<p>{event.event}</p>
@@ -238,12 +294,7 @@ const EditCalendar = (props: Props) => {
 													: "Needs Attention"}
 											</p>
 										</div>
-										<a
-											className="italic cursor-pointer underline"
-											onClick={() =>
-												setReferenceEvent(event)
-											}
-										>
+										<a className="italic cursor-pointer underline">
 											Click to Edit
 										</a>
 									</div>
