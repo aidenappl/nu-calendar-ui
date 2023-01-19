@@ -95,9 +95,13 @@ const HomePage = () => {
 					<TextInput
 						placeholder="Enter your EAB Feed URL"
 						label="EAB Feed"
+						labelLink="Info"
 						value={feed}
 						setValue={setFeed}
 						onEnterHit={initialize}
+						onLabelClick={() => {
+							window.location.href = "/eabInfo";
+						}}
 					/>
 					<Button value="Submit" onClick={() => initialize()} />
 				</div>

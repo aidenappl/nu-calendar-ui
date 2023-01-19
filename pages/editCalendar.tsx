@@ -193,7 +193,7 @@ const EditCalendar = (props: Props) => {
 				</>
 			) : null}
 			{calendar ? (
-				<div className="p-10">
+				<div className="p-5 md:p-10">
 					<h1>Edit Calendar: {props.slug}</h1>
 					<h2>Nickname: {calendar.nickname}</h2>
 					<h2>

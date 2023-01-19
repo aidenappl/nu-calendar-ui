@@ -2,20 +2,24 @@ import { useEffect, useState } from "react";
 
 type TextInputProps = {
 	label?: string;
+	labelLink?: string;
 	placeholder?: string;
 	value?: string;
 
 	setValue?: (value: string) => void;
 	onEnterHit?: () => void;
+	onLabelClick?: () => void;
 	onChange?: (e: any) => void;
 };
 
 const TextInput = (props: TextInputProps) => {
 	const {
 		label,
+		labelLink,
 		placeholder,
 		setValue = (value: string) => {},
 		onEnterHit = () => {},
+		onLabelClick = () => {},
 		onChange = (e: any) => {},
 	} = props;
 
@@ -27,7 +31,17 @@ const TextInput = (props: TextInputProps) => {
 
 	return (
 		<div className="w-full flex flex-col h-fit">
-			<label className="pb-2 text-slate-600">{label}</label>
+			<label className="pb-2 text-slate-600">
+				{label}
+				{labelLink ? (
+					<a
+						className="ml-2 text-blue-500 font-medium cursor-pointer"
+						onClick={() => onLabelClick()}
+					>
+						{labelLink}
+					</a>
+				) : null}
+			</label>
 			<div>
 				<input
 					className={
