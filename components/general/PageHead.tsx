@@ -54,7 +54,10 @@ const PageHead = () => {
 				property="og:description"
 				content="Modify your live-updating northeastern calendar to include location information, custom summaries and custom fields for complete control & customizability."
 			/>
-			<meta property="og:image" content="./images/banner_image.jpg" />
+			<meta
+				property="og:image"
+				content="https://nucal.aplb.xyz/images/banner_image.jpg"
+			/>
 
 			<meta property="twitter:card" content="summary_large_image" />
 			<meta property="twitter:url" content="https://nucal.aplb.xyz/" />
@@ -65,7 +68,7 @@ const PageHead = () => {
 			/>
 			<meta
 				property="twitter:image"
-				content="./images/banner_image.jpg"
+				content="https://nucal.aplb.xyz/images/banner_image.jpg"
 			/>
 		</Head>
 	);
