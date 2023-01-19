@@ -4,7 +4,7 @@ import "@/styles/globals.css";
 const App = ({ Component, pageProps }: any) => {
 	return (
 		<>
-			<PageHead />
+			<PageHead title={pageProps.title} />
 			<Component {...pageProps} />
 		</>
 	);

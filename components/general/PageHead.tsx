@@ -1,10 +1,16 @@
 import Head from "next/head";
 
-const PageHead = () => {
+type Props = {
+	title?: string;
+};
+
+const PageHead = (props: Props) => {
+	const { title = "Northeastern CalFeed" } = props;
+
 	return (
 		<Head>
-			<title>Northeastern CalFeed</title>
-			<meta name="title" content="Northeastern CalFeed" />
+			<title>{title}</title>
+			<meta name="title" content={title} />
 			<meta
 				name="viewport"
 				content="initial-scale=1.0, width=device-width"

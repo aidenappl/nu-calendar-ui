@@ -28,4 +28,12 @@ const EABInfo = () => {
 	);
 };
 
+export const getStaticProps = (context: any) => {
+	return {
+		props: {
+			title: "EAB Directions",
+		},
+	};
+};
+
 export default EABInfo;
