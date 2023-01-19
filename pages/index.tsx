@@ -16,6 +16,13 @@ const HomePage = () => {
 			return;
 		}
 
+		let feedTS = feed;
+
+		if (feed.slice(0, 7) == "webcal:") {
+			let tmpFeed = feed.slice(7);
+			feedTS = "https:" + tmpFeed;
+		}
+
 		setLoading(true);
 
 		const response = await NewRequest({
@@ -23,7 +30,7 @@ const HomePage = () => {
 			method: "POST",
 			body: {
 				northeastern_email: email,
-				eab_uri: feed,
+				eab_uri: feedTS,
 			},
 			auth: false,
 		});
